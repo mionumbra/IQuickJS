@@ -1,0 +1,437 @@
+// IQuickJS: QuickJS-NG 0.15.1 public API for GameMaker.
+// Runtime, Context, Value, Atom, ClassID, Module, Pointer and callback-registration
+// tokens are opaque uint64 handles. Returned strings and byte arrays are copies.
+// Functions named iqjs_unsafe_* expose native memory addresses. Passing an invalid,
+// stale, foreign-runtime or incorrectly sized pointer can crash or corrupt the process.
+
+[gml_api]
+module IQuickJS;
+
+// =============================================================================
+// Runtime
+// =============================================================================
+
+[start_fn]
+function iqjs_init() : unit;
+[finish_fn]
+function iqjs_shutdown() : unit;
+
+[global, type_hint = `uint64`] function iqjs_new_runtime() : gmval;
+// Adapter for JS_NewRuntime2: allocators are selected from native policies, never GML callbacks.
+[global, type_hint = `uint64`] function iqjs_unsafe_new_runtime_with_allocator(policy : string, [type_hint = `uint64`] opaque) : gmval;
+[global] function iqjs_free_runtime([type_hint = `uint64`] rt) : unit;
+[global] function iqjs_set_runtime_info([type_hint = `uint64`] rt, info : string) : unit;
+[global] function iqjs_set_dump_flags([type_hint = `uint64`] rt, [type_hint = `IQJSDumpFlags`] flags : int64) : unit;
+[global, type_hint = `uint64`] function iqjs_get_dump_flags([type_hint = `uint64`] rt) : gmval;
+[global] function iqjs_update_stack_top([type_hint = `uint64`] rt) : unit;
+[global] function iqjs_run_gc([type_hint = `uint64`] rt) : unit;
+[global] function iqjs_is_live_object([type_hint = `uint64`] rt, [type_hint = `uint64`] value) : bool;
+[global] function iqjs_set_can_block([type_hint = `uint64`] rt, can_block : bool) : unit;
+[global] function iqjs_is_job_pending([type_hint = `uint64`] rt) : bool;
+[global, type_hint = `uint64`] function iqjs_get_pending_job_context([type_hint = `uint64`] rt) : gmval;
+[global, type_hint = `IQJSJobResult`] function iqjs_execute_pending_job([type_hint = `uint64`] rt) : gmval;
+[global] function iqjs_get_version() : string;
+// Adapter for JS_Get/SetRuntimeOpaque and JS_AddRuntimeFinalizer: opaque tokens are not dereferenced.
+[global] function iqjs_unsafe_set_runtime_opaque([type_hint = `uint64`] rt, [type_hint = `uint64`] pointer) : unit;
+[global, type_hint = `uint64`] function iqjs_unsafe_get_runtime_opaque([type_hint = `uint64`] rt) : gmval;
+[global, type_hint = `uint64`] function iqjs_add_runtime_finalizer_adapter([type_hint = `uint64`] rt, callback : func, [type_hint = `uint64`] arg) : gmval;
+[global] function iqjs_remove_runtime_finalizer_adapter([type_hint = `uint64`] registration) : unit;
+// Adapter for JS_MarkValue: marks through a native GC traversal registered for this runtime.
+[global] function iqjs_mark_value_adapter([type_hint = `uint64`] rt, [type_hint = `uint64`] value) : unit;
+
+// =============================================================================
+// Context
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_new_context([type_hint = `uint64`] rt) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_context_raw([type_hint = `uint64`] rt) : gmval;
+[global, type_hint = `uint64`] function iqjs_dup_context([type_hint = `uint64`] ctx) : gmval;
+[global] function iqjs_free_context([type_hint = `uint64`] ctx) : unit;
+[global, type_hint = `uint64`] function iqjs_get_runtime([type_hint = `uint64`] ctx) : gmval;
+[global] function iqjs_unsafe_set_context_opaque([type_hint = `uint64`] ctx, [type_hint = `uint64`] pointer) : unit;
+[global, type_hint = `uint64`] function iqjs_unsafe_get_context_opaque([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_function_proto([type_hint = `uint64`] ctx) : gmval;
+[global] function iqjs_add_intrinsic_base_objects([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_date([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_eval([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_regexp_compiler([type_hint = `uint64`] ctx) : unit;
+[global] function iqjs_add_intrinsic_regexp([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_json([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_proxy([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_map_set([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_typed_arrays([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_promise([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_bigint([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_weak_ref([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_performance([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_dom_exception([type_hint = `uint64`] ctx) : int32;
+[global] function iqjs_add_intrinsic_atob([type_hint = `uint64`] ctx) : int32;
+
+// =============================================================================
+// Memory
+// =============================================================================
+
+[global] function iqjs_set_memory_limit([type_hint = `uint64`] rt, [type_hint = `uint64`] limit) : unit;
+[global, type_hint = `uint64`] function iqjs_get_gc_threshold([type_hint = `uint64`] rt) : gmval;
+[global] function iqjs_set_gc_threshold([type_hint = `uint64`] rt, [type_hint = `uint64`] threshold) : unit;
+[global] function iqjs_set_max_stack_size([type_hint = `uint64`] rt, [type_hint = `uint64`] size) : unit;
+[global, type_hint = `IQJSMemoryUsage`] function iqjs_compute_memory_usage([type_hint = `uint64`] rt) : gmval;
+[global] function iqjs_dump_memory_usage([type_hint = `uint64`] rt) : string;
+// UNSAFE_POINTER: direct js_* allocator family; pointer handles require exact allocator pairing.
+[global, type_hint = `uint64`] function iqjs_unsafe_calloc_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] count, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_malloc_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_mallocz_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_realloc_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] pointer, [type_hint = `uint64`] size) : gmval;
+[global] function iqjs_unsafe_free_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] pointer) : unit;
+[global, type_hint = `uint64`] function iqjs_unsafe_malloc_usable_size_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] pointer) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_calloc([type_hint = `uint64`] ctx, [type_hint = `uint64`] count, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_malloc([type_hint = `uint64`] ctx, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_mallocz([type_hint = `uint64`] ctx, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_realloc([type_hint = `uint64`] ctx, [type_hint = `uint64`] pointer, [type_hint = `uint64`] size) : gmval;
+[global, type_hint = `IQJSReallocResult`] function iqjs_unsafe_realloc2([type_hint = `uint64`] ctx, [type_hint = `uint64`] pointer, [type_hint = `uint64`] size) : gmval;
+[global] function iqjs_unsafe_free([type_hint = `uint64`] ctx, [type_hint = `uint64`] pointer) : unit;
+[global, type_hint = `uint64`] function iqjs_unsafe_malloc_usable_size([type_hint = `uint64`] ctx, [type_hint = `uint64`] pointer) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_strdup([type_hint = `uint64`] ctx, value : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_strndup([type_hint = `uint64`] ctx, value : string, [type_hint = `uint64`] byte_count) : gmval;
+
+// =============================================================================
+// Atom
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_atom_null() : gmval;
+[global, type_hint = `uint64`] function iqjs_new_atom([type_hint = `uint64`] ctx, value : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_atom_len([type_hint = `uint64`] ctx, value : string, [type_hint = `uint64`] byte_count) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_atom_uint32([type_hint = `uint64`] ctx, value : uint32) : gmval;
+[global, type_hint = `uint64`] function iqjs_dup_atom([type_hint = `uint64`] ctx, [type_hint = `uint64`] atom) : gmval;
+[global, type_hint = `uint64`] function iqjs_dup_atom_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] atom) : gmval;
+[global] function iqjs_free_atom([type_hint = `uint64`] ctx, [type_hint = `uint64`] atom) : unit;
+[global] function iqjs_free_atom_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] atom) : unit;
+[global, type_hint = `uint64`] function iqjs_atom_to_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] atom) : gmval;
+[global, type_hint = `uint64`] function iqjs_atom_to_string([type_hint = `uint64`] ctx, [type_hint = `uint64`] atom) : gmval;
+[global] function iqjs_atom_to_cstring([type_hint = `uint64`] ctx, [type_hint = `uint64`] atom) : string;
+[global, type_hint = `uint64`] function iqjs_value_to_atom([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+
+// =============================================================================
+// Class
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_new_class_id([type_hint = `uint64`] rt) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_class_id([type_hint = `uint64`] value) : gmval;
+// Adapter for JS_NewClass/JSClassDef: callback registrations are native trampolines.
+[global] function iqjs_new_class_adapter([type_hint = `uint64`] rt, [type_hint = `uint64`] class_id, name : string, finalizer : func, gc_mark : func, call : func) : int32;
+[global] function iqjs_is_registered_class([type_hint = `uint64`] rt, [type_hint = `uint64`] class_id) : bool;
+[global, type_hint = `uint64`] function iqjs_get_class_name([type_hint = `uint64`] rt, [type_hint = `uint64`] class_id) : gmval;
+[global] function iqjs_set_class_proto([type_hint = `uint64`] ctx, [type_hint = `uint64`] class_id, [type_hint = `uint64`] proto) : unit;
+[global, type_hint = `uint64`] function iqjs_get_class_proto([type_hint = `uint64`] ctx, [type_hint = `uint64`] class_id) : gmval;
+// Adapter for JSClassExoticMethods: operations are configured as JS functions, preserving sync semantics.
+[global] function iqjs_set_class_exotic_adapter([type_hint = `uint64`] ctx, [type_hint = `uint64`] class_id, [type_hint = `uint64`] methods_object) : int32;
+
+// =============================================================================
+// Value
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_null([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_undefined([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_true([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_false([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_exception([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_uninitialized([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_bool([type_hint = `uint64`] ctx, value : bool) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_int32([type_hint = `uint64`] ctx, value : int32) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_int64([type_hint = `uint64`] ctx, value : int64) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_uint32([type_hint = `uint64`] ctx, value : uint32) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_uint64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_float64([type_hint = `uint64`] ctx, value : float) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_number([type_hint = `uint64`] ctx, value : float) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_bigint64([type_hint = `uint64`] ctx, value : int64) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_biguint64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_catch_offset([type_hint = `uint64`] ctx, value : int32) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_string([type_hint = `uint64`] ctx, value : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_string_len([type_hint = `uint64`] ctx, value : string, [type_hint = `uint64`] byte_count) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_string_utf16([type_hint = `uint64`] ctx, [type_hint = `uint16[]`] code_units) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_atom_string([type_hint = `uint64`] ctx, value : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_symbol([type_hint = `uint64`] ctx, description : string, is_global : bool) : gmval;
+[global] function iqjs_free_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : unit;
+[global] function iqjs_free_value_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] value) : unit;
+[global, type_hint = `uint64`] function iqjs_dup_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_dup_value_rt([type_hint = `uint64`] rt, [type_hint = `uint64`] value) : gmval;
+[global] function iqjs_get_value_tag([type_hint = `uint64`] value) : int32;
+[global] function iqjs_is_nan([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_number([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_bigint([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_bool([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_null([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_undefined([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_exception([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_uninitialized([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_string([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_symbol([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_object([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_module([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_error([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_uncatchable_error([type_hint = `uint64`] value) : bool;
+[global] function iqjs_set_uncatchable_error([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : unit;
+[global] function iqjs_clear_uncatchable_error([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : unit;
+[global] function iqjs_reset_uncatchable_error([type_hint = `uint64`] ctx) : unit;
+[global, type_hint = `uint64`] function iqjs_throw([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_exception([type_hint = `uint64`] ctx) : gmval;
+[global] function iqjs_has_exception([type_hint = `uint64`] ctx) : bool;
+[global, type_hint = `uint64`] function iqjs_new_error([type_hint = `uint64`] ctx) : gmval;
+// Variadic printf APIs are safely expressed as literal-message adapters.
+[global, type_hint = `uint64`] function iqjs_new_internal_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_plain_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_range_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_reference_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_syntax_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_type_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_internal_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_plain_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_range_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_reference_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_syntax_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_type_error([type_hint = `uint64`] ctx, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_dom_exception([type_hint = `uint64`] ctx, name : string, message : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_throw_out_of_memory([type_hint = `uint64`] ctx) : gmval;
+[global] function iqjs_is_equal([type_hint = `uint64`] ctx, [type_hint = `uint64`] left, [type_hint = `uint64`] right) : int32;
+[global] function iqjs_is_strict_equal([type_hint = `uint64`] ctx, [type_hint = `uint64`] left, [type_hint = `uint64`] right) : bool;
+[global] function iqjs_is_same_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] left, [type_hint = `uint64`] right) : bool;
+[global] function iqjs_is_same_value_zero([type_hint = `uint64`] ctx, [type_hint = `uint64`] left, [type_hint = `uint64`] right) : bool;
+[global] function iqjs_to_bool([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : int32;
+[global, type_hint = `uint64`] function iqjs_to_boolean([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_to_number([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSInt32Result`] function iqjs_to_int32([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSUInt32Result`] function iqjs_to_uint32([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSInt64Result`] function iqjs_to_int64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSUInt64Result`] function iqjs_to_index([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSFloatResult`] function iqjs_to_float64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSInt64Result`] function iqjs_to_bigint64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSUInt64Result`] function iqjs_to_biguint64([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `IQJSInt64Result`] function iqjs_to_int64_ext([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_to_string([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_to_property_key([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global] function iqjs_to_cstring([type_hint = `uint64`] ctx, [type_hint = `uint64`] value, cesu8 : bool) : string;
+[global, type_hint = `uint16[]`] function iqjs_to_utf16([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+
+// =============================================================================
+// Object
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_new_object([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_object_proto([type_hint = `uint64`] ctx, [type_hint = `uint64`] proto) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_object_class([type_hint = `uint64`] ctx, [type_hint = `uint64`] class_id) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_object_proto_class([type_hint = `uint64`] ctx, [type_hint = `uint64`] proto, [type_hint = `uint64`] class_id) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_object_from([type_hint = `uint64`] ctx, [type_hint = `uint64[]`] atoms, [type_hint = `uint64[]`] values) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_object_from_str([type_hint = `uint64`] ctx, [type_hint = `string[]`] names, [type_hint = `uint64[]`] values) : gmval;
+[global, type_hint = `uint64`] function iqjs_to_object([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_to_object_string([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_array([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_array_from([type_hint = `uint64`] ctx, [type_hint = `uint64[]`] values) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_date([type_hint = `uint64`] ctx, epoch_ms : float) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_proxy([type_hint = `uint64`] ctx, [type_hint = `uint64`] target, [type_hint = `uint64`] handler) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_proxy_target([type_hint = `uint64`] ctx, [type_hint = `uint64`] proxy) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_proxy_handler([type_hint = `uint64`] ctx, [type_hint = `uint64`] proxy) : gmval;
+[global] function iqjs_is_function([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_async_function([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_constructor([type_hint = `uint64`] ctx, [type_hint = `uint64`] value) : bool;
+[global] function iqjs_set_constructor_bit([type_hint = `uint64`] ctx, [type_hint = `uint64`] value, enabled : bool) : bool;
+[global] function iqjs_is_regexp([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_map([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_set([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_weak_ref([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_weak_set([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_weak_map([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_data_view([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_array([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_proxy([type_hint = `uint64`] value) : bool;
+[global] function iqjs_is_date([type_hint = `uint64`] value) : bool;
+[global, type_hint = `uint64`] function iqjs_get_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_property_uint32([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, index : uint32) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_property_int64([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, index : int64) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_property_str([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, name : string) : gmval;
+[global] function iqjs_set_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom, [type_hint = `uint64`] value) : int32;
+[global] function iqjs_set_property_uint32([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, index : uint32, [type_hint = `uint64`] value) : int32;
+[global] function iqjs_set_property_int64([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, index : int64, [type_hint = `uint64`] value) : int32;
+[global] function iqjs_set_property_str([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, name : string, [type_hint = `uint64`] value) : int32;
+[global] function iqjs_has_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom) : int32;
+[global] function iqjs_is_extensible([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : int32;
+[global] function iqjs_prevent_extensions([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : int32;
+[global] function iqjs_delete_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_set_prototype([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] proto) : int32;
+[global, type_hint = `uint64`] function iqjs_get_prototype([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : gmval;
+[global, type_hint = `IQJSInt64Result`] function iqjs_get_length([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : gmval;
+[global] function iqjs_set_length([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, new_length : int64) : int32;
+[global] function iqjs_seal_object([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : int32;
+[global] function iqjs_freeze_object([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : int32;
+[global, type_hint = `IQJSPropertyEnumEntry[]`] function iqjs_get_own_property_names([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `IQJSGPNFlags`] flags : int32) : gmval;
+[global, type_hint = `IQJSPropertyDescriptorResult`] function iqjs_get_own_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom) : gmval;
+[global] function iqjs_define_property([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom, [type_hint = `uint64`] value, [type_hint = `uint64`] getter, [type_hint = `uint64`] setter, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_define_property_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom, [type_hint = `uint64`] value, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_define_property_value_uint32([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, index : uint32, [type_hint = `uint64`] value, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_define_property_value_str([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, name : string, [type_hint = `uint64`] value, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_define_property_get_set([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] atom, [type_hint = `uint64`] getter, [type_hint = `uint64`] setter, [type_hint = `IQJSPropertyFlags`] flags : int32) : int32;
+[global] function iqjs_set_constructor([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value, [type_hint = `uint64`] proto) : int32;
+[global] function iqjs_is_instance_of([type_hint = `uint64`] ctx, [type_hint = `uint64`] value, [type_hint = `uint64`] object) : int32;
+[global] function iqjs_set_is_html_dda([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : unit;
+// UNSAFE_POINTER: JS_SetOpaque/JS_GetOpaque family stores and retrieves an untyped address.
+[global] function iqjs_unsafe_set_opaque([type_hint = `uint64`] object, [type_hint = `uint64`] pointer) : int32;
+[global, type_hint = `uint64`] function iqjs_unsafe_get_opaque([type_hint = `uint64`] object, [type_hint = `uint64`] class_id) : gmval;
+[global, type_hint = `uint64`] function iqjs_unsafe_get_opaque2([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] class_id) : gmval;
+[global, type_hint = `IQJSOpaqueResult`] function iqjs_unsafe_get_any_opaque([type_hint = `uint64`] object) : gmval;
+
+// =============================================================================
+// Eval
+// =============================================================================
+
+[global] function iqjs_detect_module(source : string) : bool;
+[global, type_hint = `uint64`] function iqjs_eval([type_hint = `uint64`] ctx, source : string, filename : string, [type_hint = `IQJSEvalFlags`] flags : int32) : gmval;
+[global, type_hint = `uint64`] function iqjs_eval2([type_hint = `uint64`] ctx, source : string, [type_hint = `IQJSEvalOptions`] options) : gmval;
+[global, type_hint = `uint64`] function iqjs_eval_this([type_hint = `uint64`] ctx, [type_hint = `uint64`] this_value, source : string, filename : string, [type_hint = `IQJSEvalFlags`] flags : int32) : gmval;
+[global, type_hint = `uint64`] function iqjs_eval_this2([type_hint = `uint64`] ctx, [type_hint = `uint64`] this_value, source : string, [type_hint = `IQJSEvalOptions`] options) : gmval;
+[global, type_hint = `uint64`] function iqjs_eval_function([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_global_object([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `uint64`] function iqjs_parse_json([type_hint = `uint64`] ctx, json : string, filename : string) : gmval;
+[global, type_hint = `uint64`] function iqjs_json_stringify([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `uint64`] replacer, [type_hint = `uint64`] space) : gmval;
+
+// =============================================================================
+// Buffer
+// =============================================================================
+
+[global, type_hint = `uint64`] function iqjs_new_array_buffer_copy([type_hint = `uint64`] ctx, [type_hint = `buffer`] data) : gmval;
+// Adapter for JS_NewArrayBuffer/JSFreeArrayBufferDataFunc: bridge owns a copied GM buffer.
+[global, type_hint = `uint64`] function iqjs_new_array_buffer_owned([type_hint = `uint64`] ctx, [type_hint = `buffer`] data, is_shared : bool) : gmval;
+[global] function iqjs_detach_array_buffer([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : unit;
+[global] function iqjs_copy_array_buffer([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `buffer`] destination) : int64;
+[global, type_hint = `uint8[]`] function iqjs_get_array_buffer_copy([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : gmval;
+[global] function iqjs_is_array_buffer([type_hint = `uint64`] object) : bool;
+[global] function iqjs_is_immutable_array_buffer([type_hint = `uint64`] object) : int32;
+[global] function iqjs_set_immutable_array_buffer([type_hint = `uint64`] object, immutable : bool) : int32;
+[global, type_hint = `uint8[]`] function iqjs_get_uint8_array_copy([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_typed_array([type_hint = `uint64`] ctx, [type_hint = `uint64[]`] arguments, [type_hint = `IQJSTypedArrayType`] array_type : int32) : gmval;
+[global, type_hint = `IQJSTypedArrayBufferInfo`] function iqjs_get_typed_array_buffer([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_uint8_array_copy([type_hint = `uint64`] ctx, [type_hint = `buffer`] data) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_uint8_array_owned([type_hint = `uint64`] ctx, [type_hint = `buffer`] data, is_shared : bool) : gmval;
+[global] function iqjs_get_typed_array_type([type_hint = `uint64`] object) : int32;
+// Adapter for JS_SetSharedArrayBufferFunctions: selects a native allocator policy.
+[global] function iqjs_unsafe_set_shared_array_buffer_policy([type_hint = `uint64`] rt, policy : string, [type_hint = `uint64`] opaque) : unit;
+
+// =============================================================================
+// Promise
+// =============================================================================
+
+[global, type_hint = `IQJSPromiseCapability`] function iqjs_new_promise_capability([type_hint = `uint64`] ctx) : gmval;
+[global, type_hint = `IQJSPromiseState`] function iqjs_promise_state([type_hint = `uint64`] ctx, [type_hint = `uint64`] promise) : int32;
+[global, type_hint = `uint64`] function iqjs_promise_result([type_hint = `uint64`] ctx, [type_hint = `uint64`] promise) : gmval;
+[global] function iqjs_is_promise([type_hint = `uint64`] value) : bool;
+[global, type_hint = `uint64`] function iqjs_new_settled_promise([type_hint = `uint64`] ctx, is_reject : bool, [type_hint = `uint64`] value) : gmval;
+
+// =============================================================================
+// Module
+// =============================================================================
+
+// Adapter for JS_SetModuleLoaderFunc/2 and JS_SetModuleNormalizeFunc2. GML supplies
+// module source synchronously through a native source registry, not C callbacks.
+[global, type_hint = `uint64`] function iqjs_module_registry_create([type_hint = `uint64`] rt) : gmval;
+[global] function iqjs_module_registry_add([type_hint = `uint64`] registry, name : string, source : string) : unit;
+[global] function iqjs_module_registry_remove([type_hint = `uint64`] registry, name : string) : unit;
+[global] function iqjs_module_registry_set_supported_attributes([type_hint = `uint64`] registry, [type_hint = `string[]`] attributes) : unit;
+[global] function iqjs_module_registry_install([type_hint = `uint64`] rt, [type_hint = `uint64`] registry, attributes_aware : bool) : unit;
+[global] function iqjs_module_registry_free([type_hint = `uint64`] registry) : unit;
+[global, type_hint = `uint64`] function iqjs_get_import_meta([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_module_name([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle) : gmval;
+[global, type_hint = `uint64`] function iqjs_get_module_namespace([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle) : gmval;
+[global] function iqjs_set_module_private_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle, [type_hint = `uint64`] value) : int32;
+[global, type_hint = `uint64`] function iqjs_get_module_private_value([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle) : gmval;
+[global, type_hint = `uint64`] function iqjs_load_module([type_hint = `uint64`] ctx, basename : string, filename : string) : gmval;
+[global] function iqjs_resolve_module([type_hint = `uint64`] ctx, [type_hint = `uint64`] object) : int32;
+[global, type_hint = `uint64`] function iqjs_get_script_or_module_name([type_hint = `uint64`] ctx, levels : int32) : gmval;
+// Adapter for JS_NewCModule/JSModuleInitFunc: exports are supplied as names and values.
+[global, type_hint = `uint64`] function iqjs_new_c_module_adapter([type_hint = `uint64`] ctx, name : string, [type_hint = `string[]`] export_names) : gmval;
+[global] function iqjs_add_module_export([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle, name : string) : int32;
+[global] function iqjs_set_module_export([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle, name : string, [type_hint = `uint64`] value) : int32;
+// Adapter for function-list APIs: declarative entries replace JSCFunctionListEntry unions.
+[global] function iqjs_set_property_function_list_adapter([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `IQJSFunctionListEntry[]`] entries) : int32;
+[global] function iqjs_add_module_export_list_adapter([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle, [type_hint = `IQJSFunctionListEntry[]`] entries) : int32;
+[global] function iqjs_set_module_export_list_adapter([type_hint = `uint64`] ctx, [type_hint = `uint64`] module_handle, [type_hint = `IQJSFunctionListEntry[]`] entries) : int32;
+
+// =============================================================================
+// Serialization
+// =============================================================================
+
+[global, type_hint = `uint8[]`] function iqjs_write_object([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `IQJSWriteObjectFlags`] flags : int32) : gmval;
+[global, type_hint = `IQJSSerializedObject`] function iqjs_unsafe_write_object2([type_hint = `uint64`] ctx, [type_hint = `uint64`] object, [type_hint = `IQJSWriteObjectFlags`] flags : int32) : gmval;
+[global, type_hint = `uint64`] function iqjs_read_object([type_hint = `uint64`] ctx, [type_hint = `buffer`] data, [type_hint = `IQJSReadObjectFlags`] flags : int32) : gmval;
+// Adapter for JSSABTab: SAB pointer tokens are explicit unsafe handles in the result/input struct.
+[global, type_hint = `uint64`] function iqjs_unsafe_read_object2([type_hint = `uint64`] ctx, [type_hint = `buffer`] data, [type_hint = `IQJSReadObjectFlags`] flags : int32, [type_hint = `uint64[]`] shared_array_buffer_pointers) : gmval;
+
+// =============================================================================
+// Callbacks
+// =============================================================================
+
+// Notification adapters queue GMFunction calls; they never masquerade as synchronous C callbacks.
+[global, type_hint = `uint64`] function iqjs_set_interrupt_handler_adapter([type_hint = `uint64`] rt, callback : func) : gmval;
+[global, type_hint = `uint64`] function iqjs_set_host_promise_rejection_tracker_adapter([type_hint = `uint64`] rt, callback : func) : gmval;
+[global, type_hint = `uint64`] function iqjs_set_promise_hook_adapter([type_hint = `uint64`] rt, callback : func) : gmval;
+[global] function iqjs_remove_callback_adapter([type_hint = `uint64`] registration) : unit;
+// JSCFunction/JS_NewCFunction2/3/Data/Data2/CClosure adapter. Calls execute in native
+// JS and report invocation to GML asynchronously; immediate JS result is undefined.
+[global, type_hint = `uint64`] function iqjs_new_gml_function_adapter([type_hint = `uint64`] ctx, name : string, function_length : int32, magic : int32, callback : func) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_gml_function_data_adapter([type_hint = `uint64`] ctx, name : string, function_length : int32, magic : int32, [type_hint = `uint64[]`] data, callback : func) : gmval;
+[global, type_hint = `uint64`] function iqjs_new_gml_closure_adapter([type_hint = `uint64`] ctx, name : string, function_length : int32, magic : int32, callback : func, finalize_callback : func) : gmval;
+[global] function iqjs_register_gml_global_function([type_hint = `uint64`] ctx, name : string, callback : func) : int32;
+[global] function iqjs_unregister_gml_global_function([type_hint = `uint64`] ctx, name : string) : unit;
+// JS_EnqueueJob adapter schedules invocation of a JS function value with owned arguments.
+[global] function iqjs_enqueue_job_adapter([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value, [type_hint = `uint64[]`] arguments) : int32;
+[global, type_hint = `uint64`] function iqjs_call([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value, [type_hint = `uint64`] this_value, [type_hint = `uint64[]`] arguments) : gmval;
+[global, type_hint = `uint64`] function iqjs_invoke([type_hint = `uint64`] ctx, [type_hint = `uint64`] this_value, [type_hint = `uint64`] atom, [type_hint = `uint64[]`] arguments) : gmval;
+[global, type_hint = `uint64`] function iqjs_call_constructor([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value, [type_hint = `uint64[]`] arguments) : gmval;
+[global, type_hint = `uint64`] function iqjs_call_constructor2([type_hint = `uint64`] ctx, [type_hint = `uint64`] function_value, [type_hint = `uint64`] new_target, [type_hint = `uint64[]`] arguments) : gmval;
+
+// =============================================================================
+// Result structures
+// =============================================================================
+
+[global] class `[[IQJSMemoryUsage]]` prototype Object {
+ [field] property malloc_size : int64 { get; set; } [field] property malloc_limit : int64 { get; set; }
+ [field] property memory_used_size : int64 { get; set; } [field] property malloc_count : int64 { get; set; }
+ [field] property memory_used_count : int64 { get; set; } [field] property atom_count : int64 { get; set; }
+ [field] property atom_size : int64 { get; set; } [field] property str_count : int64 { get; set; }
+ [field] property str_size : int64 { get; set; } [field] property obj_count : int64 { get; set; }
+ [field] property obj_size : int64 { get; set; } [field] property prop_count : int64 { get; set; }
+ [field] property prop_size : int64 { get; set; } [field] property shape_count : int64 { get; set; }
+ [field] property shape_size : int64 { get; set; } [field] property js_func_count : int64 { get; set; }
+ [field] property js_func_size : int64 { get; set; } [field] property js_func_code_size : int64 { get; set; }
+ [field] property js_func_pc2line_count : int64 { get; set; } [field] property js_func_pc2line_size : int64 { get; set; }
+ [field] property c_func_count : int64 { get; set; } [field] property array_count : int64 { get; set; }
+ [field] property fast_array_count : int64 { get; set; } [field] property fast_array_elements : int64 { get; set; }
+ [field] property binary_object_count : int64 { get; set; } [field] property binary_object_size : int64 { get; set; }
+}
+[global] class `[[IQJSInt32Result]]` prototype Object { [field] property status : int32 { get; set; } [field] property value : int32 { get; set; } }
+[global] class `[[IQJSUInt32Result]]` prototype Object { [field] property status : int32 { get; set; } [field] property value : uint32 { get; set; } }
+[global] class `[[IQJSInt64Result]]` prototype Object { [field] property status : int32 { get; set; } [field] property value : int64 { get; set; } }
+[global] class `[[IQJSUInt64Result]]` prototype Object { [field] property status : int32 { get; set; } [field, type_hint = `uint64`] property value : gmval { get; set; } }
+[global] class `[[IQJSFloatResult]]` prototype Object { [field] property status : int32 { get; set; } [field] property value : float { get; set; } }
+[global] class `[[IQJSReallocResult]]` prototype Object { [field, type_hint = `uint64`] property pointer : gmval { get; set; } [field, type_hint = `uint64`] property slack : gmval { get; set; } }
+[global] class `[[IQJSPropertyEnumEntry]]` prototype Object { [field] property is_enumerable : bool { get; set; } [field, type_hint = `uint64`] property atom : gmval { get; set; } }
+[global] class `[[IQJSPropertyDescriptorResult]]` prototype Object { [field] property status : int32 { get; set; } [field] property flags : int32 { get; set; } [field, type_hint = `uint64`] property value : gmval { get; set; } [field, type_hint = `uint64`] property getter : gmval { get; set; } [field, type_hint = `uint64`] property setter : gmval { get; set; } }
+[global] class `[[IQJSTypedArrayBufferInfo]]` prototype Object { [field, type_hint = `uint64`] property buffer : gmval { get; set; } [field, type_hint = `uint64`] property byte_offset : gmval { get; set; } [field, type_hint = `uint64`] property byte_length : gmval { get; set; } [field, type_hint = `uint64`] property bytes_per_element : gmval { get; set; } }
+[global] class `[[IQJSJobResult]]` prototype Object { [field] property status : int32 { get; set; } [field, type_hint = `uint64`] property context : gmval { get; set; } }
+[global] class `[[IQJSPromiseCapability]]` prototype Object { [field, type_hint = `uint64`] property promise : gmval { get; set; } [field, type_hint = `uint64`] property resolve : gmval { get; set; } [field, type_hint = `uint64`] property reject : gmval { get; set; } }
+[global] class `[[IQJSOpaqueResult]]` prototype Object { [field, type_hint = `uint64`] property pointer : gmval { get; set; } [field, type_hint = `uint64`] property class_id : gmval { get; set; } }
+[global] class `[[IQJSEvalOptions]]` prototype Object { [field] property version : int32 { get; set; } [field, type_hint = `IQJSEvalFlags`] property eval_flags : gmval { get; set; } [field] property filename : string { get; set; } [field] property line_num : int32 { get; set; } }
+[global] class `[[IQJSFunctionListEntry]]` prototype Object { [field] property name : string { get; set; } [field] property definition_type : int32 { get; set; } [field] property property_flags : int32 { get; set; } [field] property string_value : string { get; set; } [field] property integer_value : int64 { get; set; } [field] property float_value : float { get; set; } [field, type_hint = `uint64`] property value : gmval { get; set; } }
+[global] class `[[IQJSSerializedObject]]` prototype Object { [field, type_hint = `uint8[]`] property bytes : gmval { get; set; } [field, type_hint = `uint64[]`] property shared_array_buffer_pointers : gmval { get; set; } }
+
+// =============================================================================
+// Enums
+// =============================================================================
+
+[global, bind = typed_gml] enum IQJSValueTag { BigInt = -9, Symbol = -8, String = -7, StringRope = -6, Module = -3, FunctionBytecode = -2, Object = -1, Int = 0, Bool = 1, Null = 2, Undefined = 3, Uninitialized = 4, CatchOffset = 5, Exception = 6, ShortBigInt = 7, Float64 = 8 }
+[global, bind = typed_gml] enum IQJSEvalFlags { Global = 0, Module = 1, Direct = 2, Indirect = 3, TypeMask = 3, Strict = 8, CompileOnly = 32, BacktraceBarrier = 64, Async = 128 }
+[global, bind = typed_gml] enum IQJSPropertyFlags { Configurable = 1, Writable = 2, Enumerable = 4, CWE = 7, HasConfigurable = 256, HasWritable = 512, HasEnumerable = 1024, HasGet = 2048, HasSet = 4096, HasValue = 8192, Throw = 16384, ThrowStrict = 32768 }
+[global, bind = typed_gml] enum IQJSGPNFlags { StringMask = 1, SymbolMask = 2, PrivateMask = 4, EnumOnly = 16, SetEnum = 32 }
+[global, bind = typed_gml] enum IQJSWriteObjectFlags { Bytecode = 1, BSwap = 0, SharedArrayBuffer = 4, Reference = 8, StripSource = 16, StripDebug = 32 }
+[global, bind = typed_gml] enum IQJSReadObjectFlags { Bytecode = 1, RomData = 0, SharedArrayBuffer = 4, Reference = 8 }
+[global, bind = typed_gml] enum IQJSTypedArrayType { Uint8Clamped = 0, Int8 = 1, Uint8 = 2, Int16 = 3, Uint16 = 4, Int32 = 5, Uint32 = 6, BigInt64 = 7, BigUint64 = 8, Float16 = 9, Float32 = 10, Float64 = 11 }
+[global, bind = typed_gml] enum IQJSPromiseState { NotAPromise = -1, Pending = 0, Fulfilled = 1, Rejected = 2 }
+[global, bind = typed_gml] enum IQJSPromiseHookType { Init = 0, Before = 1, After = 2, Resolve = 3 }
+[global, bind = typed_gml, type_hint = `uint64`] enum IQJSDumpFlags { BytecodeFinal = 1, BytecodePass2 = 2, BytecodePass1 = 4, BytecodeHex = 16, BytecodePC2Line = 32, BytecodeStack = 64, BytecodeStep = 128, ReadObject = 256, Free = 512, GC = 1024, GCFree = 2048, ModuleResolve = 4096, Promise = 8192, Leaks = 16384, AtomLeaks = 32768, Memory = 65536, Objects = 131072, Atoms = 262144, Shapes = 524288, AbortOnLeaks = 1097728 }

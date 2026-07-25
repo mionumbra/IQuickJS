@@ -1,0 +1,49 @@
+{
+  "$schema": "./extgen.schema.json",
+  "root": "./",
+  "input": "./api.gmidl",
+  "profile": "Full",
+  "gamemaker": {
+    "wrappers": {
+      "enabled": true,
+      "outputFile": "project/scripts/IQuickJS_wrappers/IQuickJS_wrappers.gml"
+    },
+    "extension": {
+      "enabled": true,
+      "outputFile": "./project/extensions/IQuickJS/IQuickJS.yy",
+      "mode": "patch",
+      "extensionName": "IQuickJS",
+      "extensionFileName": "IQuickJS.dll",
+      "patchFrameworks": true
+    },
+    "injectors": {
+      "enabled": true,
+      "outputFolder": "./project/extensions/IQuickJS/injectors"
+    }
+  },
+  "targets": {
+    "sourceFolder": "./native",
+    "sourceFile": "{0}_native",
+    "windows": {
+      "enabled": true,
+      "outputFolder": "./project/extensions/IQuickJS"
+    }
+  },
+  "extras": {
+    "docs": {
+      "enabled": true,
+       "outputFile": "./docs/documentation.json",
+      "overwrite": true
+    }
+  },
+  "build": {
+    "emitCmake": true,
+    "cmake": {
+      "cppStandard": 20,
+      "cppExtensions": false,
+      "strictWarnings": true,
+      "useThirdParty": true,
+      "emitPresets": true
+    }
+  }
+}

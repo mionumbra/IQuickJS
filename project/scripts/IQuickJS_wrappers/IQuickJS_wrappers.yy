@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"IQuickJS_wrappers",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"IQuickJS_wrappers",
+  "parent":{
+    "name":"IQuickJS",
+    "path":"IQuickJS.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

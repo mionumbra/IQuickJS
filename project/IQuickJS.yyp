@@ -1,0 +1,40 @@
+{
+  "$GMProject":"v1",
+  "%Name":"IQuickJS",
+  "AudioGroups":[
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+  "configs":{
+    "children":[],
+    "name":"Default",
+  },
+  "defaultScriptType":1,
+  "Folders":[],
+  "ForcedPrefabProjectReferences":[],
+  "IncludedFiles":[
+    {"$GMIncludedFile":"","%Name":"_Drizzle_雨之城 - CsLrisEto.js","CopyToMask":-1,"filePath":"datafiles","name":"_Drizzle_雨之城 - CsLrisEto.js","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"conv - 副本.js","CopyToMask":-1,"filePath":"datafiles","name":"conv - 副本.js","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+  ],
+  "isEcma":false,
+  "LibraryEmitters":[],
+  "MetaData":{
+    "IDEVersion":"2026.0.0.16",
+  },
+  "name":"IQuickJS",
+  "resources":[
+    {"id":{"name":"IQuickJS","path":"extensions/IQuickJS/IQuickJS.yy",},},
+    {"id":{"name":"Room","path":"rooms/Room/Room.yy",},},
+    {"id":{"name":"GMExtCore","path":"scripts/GMExtCore/GMExtCore.yy",},},
+    {"id":{"name":"IQuickJS_wrappers","path":"scripts/IQuickJS_wrappers/IQuickJS_wrappers.yy",},},
+    {"id":{"name":"Script","path":"scripts/Script/Script.yy",},},
+  ],
+  "resourceType":"GMProject",
+  "resourceVersion":"2.0",
+  "RoomOrderNodes":[
+    {"roomId":{"name":"Room","path":"rooms/Room/Room.yy",},},
+  ],
+  "templateType":"game",
+  "TextureGroups":[
+    {"$GMTextureGroup":"","%Name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","customOptions":"","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"name":"Default","resourceType":"GMTextureGroup","resourceVersion":"2.0","targets":-1,},
+  ],
+}

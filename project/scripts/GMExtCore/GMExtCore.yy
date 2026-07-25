@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMExtCore",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMExtCore",
+  "parent":{
+    "name":"IQuickJS",
+    "path":"IQuickJS.yyp",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
