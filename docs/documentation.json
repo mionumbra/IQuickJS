@@ -1,0 +1,2619 @@
+/**
+ * @function_partial iqjs_init
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_shutdown
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_runtime
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_new_runtime_with_allocator
+ * @param {String} policy
+ * @param {Real} opaque
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_runtime
+ * @param {Real} rt
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_runtime_info
+ * @param {Real} rt
+ * @param {String} info
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_dump_flags
+ * @param {Real} rt
+ * @param {Enum.IQJSDumpFlags} flags
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_dump_flags
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_update_stack_top
+ * @param {Real} rt
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_run_gc
+ * @param {Real} rt
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_live_object
+ * @param {Real} rt
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_can_block
+ * @param {Real} rt
+ * @param {Bool} can_block
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_job_pending
+ * @param {Real} rt
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_pending_job_context
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_execute_pending_job
+ * @param {Real} rt
+ * @returns {Struct.IQJSJobResult} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_version
+ * @returns {String} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_set_runtime_opaque
+ * @param {Real} rt
+ * @param {Real} pointer
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_get_runtime_opaque
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_runtime_finalizer_adapter
+ * @param {Real} rt
+ * @param {Function} callback
+ * @param {Real} arg
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_remove_runtime_finalizer_adapter
+ * @param {Real} registration
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_mark_value_adapter
+ * @param {Real} rt
+ * @param {Real} value
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_context
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_context_raw
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dup_context
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_context
+ * @param {Real} ctx
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_runtime
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_set_context_opaque
+ * @param {Real} ctx
+ * @param {Real} pointer
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_get_context_opaque
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_function_proto
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_base_objects
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_date
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_eval
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_regexp_compiler
+ * @param {Real} ctx
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_regexp
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_json
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_proxy
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_map_set
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_typed_arrays
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_promise
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_bigint
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_weak_ref
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_performance
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_dom_exception
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_intrinsic_atob
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_memory_limit
+ * @param {Real} rt
+ * @param {Real} limit
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_gc_threshold
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_gc_threshold
+ * @param {Real} rt
+ * @param {Real} threshold
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_max_stack_size
+ * @param {Real} rt
+ * @param {Real} size
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_compute_memory_usage
+ * @param {Real} rt
+ * @returns {Struct.IQJSMemoryUsage} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dump_memory_usage
+ * @param {Real} rt
+ * @returns {String} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_calloc_rt
+ * @param {Real} rt
+ * @param {Real} count
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_malloc_rt
+ * @param {Real} rt
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_mallocz_rt
+ * @param {Real} rt
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_realloc_rt
+ * @param {Real} rt
+ * @param {Real} pointer
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_free_rt
+ * @param {Real} rt
+ * @param {Real} pointer
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_malloc_usable_size_rt
+ * @param {Real} rt
+ * @param {Real} pointer
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_calloc
+ * @param {Real} ctx
+ * @param {Real} count
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_malloc
+ * @param {Real} ctx
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_mallocz
+ * @param {Real} ctx
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_realloc
+ * @param {Real} ctx
+ * @param {Real} pointer
+ * @param {Real} size
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_realloc2
+ * @param {Real} ctx
+ * @param {Real} pointer
+ * @param {Real} size
+ * @returns {Struct.IQJSReallocResult} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_free
+ * @param {Real} ctx
+ * @param {Real} pointer
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_malloc_usable_size
+ * @param {Real} ctx
+ * @param {Real} pointer
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_strdup
+ * @param {Real} ctx
+ * @param {String} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_strndup
+ * @param {Real} ctx
+ * @param {String} value
+ * @param {Real} byte_count
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_atom_null
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_atom
+ * @param {Real} ctx
+ * @param {String} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_atom_len
+ * @param {Real} ctx
+ * @param {String} value
+ * @param {Real} byte_count
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_atom_uint32
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dup_atom
+ * @param {Real} ctx
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dup_atom_rt
+ * @param {Real} rt
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_atom
+ * @param {Real} ctx
+ * @param {Real} atom
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_atom_rt
+ * @param {Real} rt
+ * @param {Real} atom
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_atom_to_value
+ * @param {Real} ctx
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_atom_to_string
+ * @param {Real} ctx
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_atom_to_cstring
+ * @param {Real} ctx
+ * @param {Real} atom
+ * @returns {String} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_value_to_atom
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_class_id
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_class_id
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_class_adapter
+ * @param {Real} rt
+ * @param {Real} class_id
+ * @param {String} name
+ * @param {Function} finalizer
+ * @param {Function} gc_mark
+ * @param {Function} call
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_registered_class
+ * @param {Real} rt
+ * @param {Real} class_id
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_class_name
+ * @param {Real} rt
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_class_proto
+ * @param {Real} ctx
+ * @param {Real} class_id
+ * @param {Real} proto
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_class_proto
+ * @param {Real} ctx
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_class_exotic_adapter
+ * @param {Real} ctx
+ * @param {Real} class_id
+ * @param {Real} methods_object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_null
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_undefined
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_true
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_false
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_exception
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_uninitialized
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_bool
+ * @param {Real} ctx
+ * @param {Bool} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_int32
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_int64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_uint32
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_uint64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_float64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_number
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_bigint64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_biguint64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_catch_offset
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_string
+ * @param {Real} ctx
+ * @param {String} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_string_len
+ * @param {Real} ctx
+ * @param {String} value
+ * @param {Real} byte_count
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_string_utf16
+ * @param {Real} ctx
+ * @param {Array[Real]} code_units
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_atom_string
+ * @param {Real} ctx
+ * @param {String} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_symbol
+ * @param {Real} ctx
+ * @param {String} description
+ * @param {Bool} is_global
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_value
+ * @param {Real} ctx
+ * @param {Real} value
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_free_value_rt
+ * @param {Real} rt
+ * @param {Real} value
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dup_value
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_dup_value_rt
+ * @param {Real} rt
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_value_tag
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_nan
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_number
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_bigint
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_bool
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_null
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_undefined
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_exception
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_uninitialized
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_string
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_symbol
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_object
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_module
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_error
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_uncatchable_error
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_uncatchable_error
+ * @param {Real} ctx
+ * @param {Real} value
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_clear_uncatchable_error
+ * @param {Real} ctx
+ * @param {Real} value
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_reset_uncatchable_error
+ * @param {Real} ctx
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_exception
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_has_exception
+ * @param {Real} ctx
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_error
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_internal_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_plain_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_range_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_reference_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_syntax_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_type_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_internal_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_plain_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_range_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_reference_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_syntax_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_type_error
+ * @param {Real} ctx
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_dom_exception
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {String} message
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_throw_out_of_memory
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_equal
+ * @param {Real} ctx
+ * @param {Real} left
+ * @param {Real} right
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_strict_equal
+ * @param {Real} ctx
+ * @param {Real} left
+ * @param {Real} right
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_same_value
+ * @param {Real} ctx
+ * @param {Real} left
+ * @param {Real} right
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_same_value_zero
+ * @param {Real} ctx
+ * @param {Real} left
+ * @param {Real} right
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_bool
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_boolean
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_number
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_int32
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSInt32Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_uint32
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSUInt32Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_int64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_index
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSUInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_float64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSFloatResult} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_bigint64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_biguint64
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSUInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_int64_ext
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Struct.IQJSInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_string
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_property_key
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_cstring
+ * @param {Real} ctx
+ * @param {Real} value
+ * @param {Bool} cesu8
+ * @returns {String} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_utf16
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Array[Real]} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object_proto
+ * @param {Real} ctx
+ * @param {Real} proto
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object_class
+ * @param {Real} ctx
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object_proto_class
+ * @param {Real} ctx
+ * @param {Real} proto
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object_from
+ * @param {Real} ctx
+ * @param {Array[Real]} atoms
+ * @param {Array[Real]} values
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_object_from_str
+ * @param {Real} ctx
+ * @param {Array[String]} names
+ * @param {Array[Real]} values
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_object
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_to_object_string
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_array
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_array_from
+ * @param {Real} ctx
+ * @param {Array[Real]} values
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_date
+ * @param {Real} ctx
+ * @param {Real} epoch_ms
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_proxy
+ * @param {Real} ctx
+ * @param {Real} target
+ * @param {Real} handler
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_proxy_target
+ * @param {Real} ctx
+ * @param {Real} proxy
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_proxy_handler
+ * @param {Real} ctx
+ * @param {Real} proxy
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_function
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_async_function
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_constructor
+ * @param {Real} ctx
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_constructor_bit
+ * @param {Real} ctx
+ * @param {Real} value
+ * @param {Bool} enabled
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_regexp
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_map
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_set
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_weak_ref
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_weak_set
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_weak_map
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_data_view
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_array
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_proxy
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_date
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_property_uint32
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} index
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_property_int64
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} index
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_property_str
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {String} name
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_property_uint32
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} index
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_property_int64
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} index
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_property_str
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {String} name
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_has_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_extensible
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_prevent_extensions
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_delete_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_prototype
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} proto
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_prototype
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_length
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Struct.IQJSInt64Result} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_length
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} new_length
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_seal_object
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_freeze_object
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_own_property_names
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Enum.IQJSGPNFlags} flags
+ * @returns {Array[Struct.IQJSPropertyEnumEntry]} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_own_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @returns {Struct.IQJSPropertyDescriptorResult} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_define_property
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @param {Real} value
+ * @param {Real} getter
+ * @param {Real} setter
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_define_property_value
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @param {Real} value
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_define_property_value_uint32
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} index
+ * @param {Real} value
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_define_property_value_str
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {String} name
+ * @param {Real} value
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_define_property_get_set
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} atom
+ * @param {Real} getter
+ * @param {Real} setter
+ * @param {Enum.IQJSPropertyFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_constructor
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @param {Real} proto
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_instance_of
+ * @param {Real} ctx
+ * @param {Real} value
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_is_html_dda
+ * @param {Real} ctx
+ * @param {Real} object
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_set_opaque
+ * @param {Real} object
+ * @param {Real} pointer
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_get_opaque
+ * @param {Real} object
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_get_opaque2
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} class_id
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_get_any_opaque
+ * @param {Real} object
+ * @returns {Struct.IQJSOpaqueResult} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_detect_module
+ * @param {String} source
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_eval
+ * @param {Real} ctx
+ * @param {String} source
+ * @param {String} filename
+ * @param {Enum.IQJSEvalFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_eval2
+ * @param {Real} ctx
+ * @param {String} source
+ * @param {Struct.IQJSEvalOptions} options
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_eval_this
+ * @param {Real} ctx
+ * @param {Real} this_value
+ * @param {String} source
+ * @param {String} filename
+ * @param {Enum.IQJSEvalFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_eval_this2
+ * @param {Real} ctx
+ * @param {Real} this_value
+ * @param {String} source
+ * @param {Struct.IQJSEvalOptions} options
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_eval_function
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_global_object
+ * @param {Real} ctx
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_parse_json
+ * @param {Real} ctx
+ * @param {String} json
+ * @param {String} filename
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_json_stringify
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Real} replacer
+ * @param {Real} space
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_array_buffer_copy
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_array_buffer_owned
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @param {Bool} is_shared
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_detach_array_buffer
+ * @param {Real} ctx
+ * @param {Real} object
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_copy_array_buffer
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Buffer} destination
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_array_buffer_copy
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Array[Real]} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_array_buffer
+ * @param {Real} object
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_immutable_array_buffer
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_immutable_array_buffer
+ * @param {Real} object
+ * @param {Bool} immutable
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_uint8_array_copy
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Array[Real]} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_typed_array
+ * @param {Real} ctx
+ * @param {Array[Real]} arguments
+ * @param {Enum.IQJSTypedArrayType} array_type
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_typed_array_buffer
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Struct.IQJSTypedArrayBufferInfo} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_uint8_array_copy
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_uint8_array_owned
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @param {Bool} is_shared
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_typed_array_type
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_set_shared_array_buffer_policy
+ * @param {Real} rt
+ * @param {String} policy
+ * @param {Real} opaque
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_promise_capability
+ * @param {Real} ctx
+ * @returns {Struct.IQJSPromiseCapability} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_promise_state
+ * @param {Real} ctx
+ * @param {Real} promise
+ * @returns {Enum.IQJSPromiseState} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_promise_result
+ * @param {Real} ctx
+ * @param {Real} promise
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_is_promise
+ * @param {Real} value
+ * @returns {Bool} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_settled_promise
+ * @param {Real} ctx
+ * @param {Bool} is_reject
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_create
+ * @param {Real} rt
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_add
+ * @param {Real} registry
+ * @param {String} name
+ * @param {String} source
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_remove
+ * @param {Real} registry
+ * @param {String} name
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_set_supported_attributes
+ * @param {Real} registry
+ * @param {Array[String]} attributes
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_install
+ * @param {Real} rt
+ * @param {Real} registry
+ * @param {Bool} attributes_aware
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_module_registry_free
+ * @param {Real} registry
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_import_meta
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_module_name
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_module_namespace
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_module_private_value
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_module_private_value
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_load_module
+ * @param {Real} ctx
+ * @param {String} basename
+ * @param {String} filename
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_resolve_module
+ * @param {Real} ctx
+ * @param {Real} object
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_get_script_or_module_name
+ * @param {Real} ctx
+ * @param {Real} levels
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_c_module_adapter
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {Array[String]} export_names
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_module_export
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @param {String} name
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_module_export
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @param {String} name
+ * @param {Real} value
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_property_function_list_adapter
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Array[Struct.IQJSFunctionListEntry]} entries
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_add_module_export_list_adapter
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @param {Array[Struct.IQJSFunctionListEntry]} entries
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_module_export_list_adapter
+ * @param {Real} ctx
+ * @param {Real} module_handle
+ * @param {Array[Struct.IQJSFunctionListEntry]} entries
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_write_object
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Enum.IQJSWriteObjectFlags} flags
+ * @returns {Array[Real]} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_write_object2
+ * @param {Real} ctx
+ * @param {Real} object
+ * @param {Enum.IQJSWriteObjectFlags} flags
+ * @returns {Struct.IQJSSerializedObject} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_read_object
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @param {Enum.IQJSReadObjectFlags} flags
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unsafe_read_object2
+ * @param {Real} ctx
+ * @param {Buffer} data
+ * @param {Enum.IQJSReadObjectFlags} flags
+ * @param {Array[Real]} shared_array_buffer_pointers
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_interrupt_handler_adapter
+ * @param {Real} rt
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_host_promise_rejection_tracker_adapter
+ * @param {Real} rt
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_set_promise_hook_adapter
+ * @param {Real} rt
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_remove_callback_adapter
+ * @param {Real} registration
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_gml_function_adapter
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {Real} function_length
+ * @param {Real} magic
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_gml_function_data_adapter
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {Real} function_length
+ * @param {Real} magic
+ * @param {Array[Real]} data
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_new_gml_closure_adapter
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {Real} function_length
+ * @param {Real} magic
+ * @param {Function} callback
+ * @param {Function} finalize_callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_register_gml_global_function
+ * @param {Real} ctx
+ * @param {String} name
+ * @param {Function} callback
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_unregister_gml_global_function
+ * @param {Real} ctx
+ * @param {String} name
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_enqueue_job_adapter
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @param {Array[Real]} arguments
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_call
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @param {Real} this_value
+ * @param {Array[Real]} arguments
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_invoke
+ * @param {Real} ctx
+ * @param {Real} this_value
+ * @param {Real} atom
+ * @param {Array[Real]} arguments
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_call_constructor
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @param {Array[Real]} arguments
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @function_partial iqjs_call_constructor2
+ * @param {Real} ctx
+ * @param {Real} function_value
+ * @param {Real} new_target
+ * @param {Array[Real]} arguments
+ * @returns {Real} 
+ * @function_end 
+ */
+
+/**
+ * @struct_partial IQJSMemoryUsage
+ * @member {Real} malloc_size
+ * @member {Real} malloc_limit
+ * @member {Real} memory_used_size
+ * @member {Real} malloc_count
+ * @member {Real} memory_used_count
+ * @member {Real} atom_count
+ * @member {Real} atom_size
+ * @member {Real} str_count
+ * @member {Real} str_size
+ * @member {Real} obj_count
+ * @member {Real} obj_size
+ * @member {Real} prop_count
+ * @member {Real} prop_size
+ * @member {Real} shape_count
+ * @member {Real} shape_size
+ * @member {Real} js_func_count
+ * @member {Real} js_func_size
+ * @member {Real} js_func_code_size
+ * @member {Real} js_func_pc2line_count
+ * @member {Real} js_func_pc2line_size
+ * @member {Real} c_func_count
+ * @member {Real} array_count
+ * @member {Real} fast_array_count
+ * @member {Real} fast_array_elements
+ * @member {Real} binary_object_count
+ * @member {Real} binary_object_size
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSInt32Result
+ * @member {Real} status
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSUInt32Result
+ * @member {Real} status
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSInt64Result
+ * @member {Real} status
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSUInt64Result
+ * @member {Real} status
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSFloatResult
+ * @member {Real} status
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSReallocResult
+ * @member {Real} pointer
+ * @member {Real} slack
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSPropertyEnumEntry
+ * @member {Bool} is_enumerable
+ * @member {Real} atom
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSPropertyDescriptorResult
+ * @member {Real} status
+ * @member {Real} flags
+ * @member {Real} value
+ * @member {Real} getter
+ * @member {Real} setter
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSTypedArrayBufferInfo
+ * @member {Real} buffer
+ * @member {Real} byte_offset
+ * @member {Real} byte_length
+ * @member {Real} bytes_per_element
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSJobResult
+ * @member {Real} status
+ * @member {Real} context
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSPromiseCapability
+ * @member {Real} promise
+ * @member {Real} resolve
+ * @member {Real} reject
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSOpaqueResult
+ * @member {Real} pointer
+ * @member {Real} class_id
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSEvalOptions
+ * @member {Real} version
+ * @member {Enum.IQJSEvalFlags} eval_flags
+ * @member {String} filename
+ * @member {Real} line_num
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSFunctionListEntry
+ * @member {String} name
+ * @member {Real} definition_type
+ * @member {Real} property_flags
+ * @member {String} string_value
+ * @member {Real} integer_value
+ * @member {Real} float_value
+ * @member {Real} value
+ * @struct_end 
+ */
+
+/**
+ * @struct_partial IQJSSerializedObject
+ * @member {Array[Real]} bytes
+ * @member {Array[Real]} shared_array_buffer_pointers
+ * @struct_end 
+ */
+
+/**
+ * @enum_partial IQJSValueTag
+ * @member BigInt
+ * @member Symbol
+ * @member String
+ * @member StringRope
+ * @member Module
+ * @member FunctionBytecode
+ * @member Object
+ * @member Int
+ * @member Bool
+ * @member Null
+ * @member Undefined
+ * @member Uninitialized
+ * @member CatchOffset
+ * @member Exception
+ * @member ShortBigInt
+ * @member Float64
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSEvalFlags
+ * @member Global
+ * @member Module
+ * @member Direct
+ * @member Indirect
+ * @member TypeMask
+ * @member Strict
+ * @member CompileOnly
+ * @member BacktraceBarrier
+ * @member Async
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSPropertyFlags
+ * @member Configurable
+ * @member Writable
+ * @member Enumerable
+ * @member CWE
+ * @member HasConfigurable
+ * @member HasWritable
+ * @member HasEnumerable
+ * @member HasGet
+ * @member HasSet
+ * @member HasValue
+ * @member Throw
+ * @member ThrowStrict
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSGPNFlags
+ * @member StringMask
+ * @member SymbolMask
+ * @member PrivateMask
+ * @member EnumOnly
+ * @member SetEnum
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSWriteObjectFlags
+ * @member Bytecode
+ * @member BSwap
+ * @member SharedArrayBuffer
+ * @member Reference
+ * @member StripSource
+ * @member StripDebug
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSReadObjectFlags
+ * @member Bytecode
+ * @member RomData
+ * @member SharedArrayBuffer
+ * @member Reference
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSTypedArrayType
+ * @member Uint8Clamped
+ * @member Int8
+ * @member Uint8
+ * @member Int16
+ * @member Uint16
+ * @member Int32
+ * @member Uint32
+ * @member BigInt64
+ * @member BigUint64
+ * @member Float16
+ * @member Float32
+ * @member Float64
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSPromiseState
+ * @member NotAPromise
+ * @member Pending
+ * @member Fulfilled
+ * @member Rejected
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSPromiseHookType
+ * @member Init
+ * @member Before
+ * @member After
+ * @member Resolve
+ * @enum_end 
+ */
+
+/**
+ * @enum_partial IQJSDumpFlags
+ * @member BytecodeFinal
+ * @member BytecodePass2
+ * @member BytecodePass1
+ * @member BytecodeHex
+ * @member BytecodePC2Line
+ * @member BytecodeStack
+ * @member BytecodeStep
+ * @member ReadObject
+ * @member Free
+ * @member GC
+ * @member GCFree
+ * @member ModuleResolve
+ * @member Promise
+ * @member Leaks
+ * @member AtomLeaks
+ * @member Memory
+ * @member Objects
+ * @member Atoms
+ * @member Shapes
+ * @member AbortOnLeaks
+ * @enum_end 
+ */
+
+/**
+ * @const_partial macros
+ * @const_end 
+ */
+

@@ -1,0 +1,27 @@
+name: Native Smoke Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Configure
+        run: cmake -S tests -B out/smoke -G Ninja
+
+      - name: Build
+        run: cmake --build out/smoke --config Release
+
+      - name: Test
+        run: ctest --test-dir out/smoke --output-on-failure
