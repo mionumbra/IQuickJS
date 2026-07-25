@@ -72,7 +72,7 @@ Functions prefixed `iqjs_unsafe_` accept or expose native pointer values. Invali
 
 ## License
 
-This repository does not yet declare a license for IQuickJS itself. The QuickJS-NG dependency is provided as a Git submodule and retains its own MIT license in `third_party/quickjs-ng/LICENSE`.
+IQuickJS is licensed under the [MIT License](LICENSE). The QuickJS-NG dependency is provided as a Git submodule and retains its own MIT license in `third_party/quickjs-ng/LICENSE`.
 
 ## Contributing
 
