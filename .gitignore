@@ -2,8 +2,8 @@
 /.clang-format
 project/extensions/IQuickJS/injectors
 project/extensions/IQuickJS/IQuickJS.dll
-project/scripts/IQuickJS_wrappers/IQuickJS_wrappers.gml
-project/scripts/GMExtCore/GMExtCore.gml
+project/scripts/IQuickJS_Wrappers/IQuickJS_Wrappers.gml
+project/scripts/ExtensionCore_api/ExtensionCore_api.gml
 build/
 out/
 templates/

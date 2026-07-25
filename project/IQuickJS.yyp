@@ -24,8 +24,8 @@
   "resources":[
     {"id":{"name":"IQuickJS","path":"extensions/IQuickJS/IQuickJS.yy",},},
     {"id":{"name":"Room","path":"rooms/Room/Room.yy",},},
-    {"id":{"name":"GMExtCore","path":"scripts/GMExtCore/GMExtCore.yy",},},
-    {"id":{"name":"IQuickJS_wrappers","path":"scripts/IQuickJS_wrappers/IQuickJS_wrappers.yy",},},
+    {"id":{"name":"ExtensionCore_api","path":"scripts/ExtensionCore_api/ExtensionCore_api.yy",},},
+    {"id":{"name":"IQuickJS_Wrappers","path":"scripts/IQuickJS_Wrappers/IQuickJS_Wrappers.yy",},},
     {"id":{"name":"Script","path":"scripts/Script/Script.yy",},},
   ],
   "resourceType":"GMProject",

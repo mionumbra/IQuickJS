@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"GMExtCore",
+  "%Name":"IQuickJS_Wrappers",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"GMExtCore",
+  "name":"IQuickJS_Wrappers",
   "parent":{
     "name":"IQuickJS",
     "path":"IQuickJS.yyp",

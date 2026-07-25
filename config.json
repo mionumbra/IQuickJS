@@ -6,7 +6,7 @@
   "gamemaker": {
     "wrappers": {
       "enabled": true,
-      "outputFile": "project/scripts/IQuickJS_wrappers/IQuickJS_wrappers.gml"
+      "outputFile": "project/scripts/IQuickJS_Wrappers/IQuickJS_Wrappers.gml"
     },
     "extension": {
       "enabled": true,
